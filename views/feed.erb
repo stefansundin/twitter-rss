@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>https://twitter.com/<%= @user %></id>
+  <title>@<%= @user %></title>
+  <icon>https://twitter.com/favicon.ico</icon>
+  <link href="https://twitter.com/<%= @user %>" />
+  <link href="https://twittrss.herokuapp.com/@<%= @user %>" rel="self" />
+  <updated><%= @tweets[0]["date"] if @tweets[0] %></updated>
+  <author>
+    <name>Stefan Sundin</name>
+    <uri>https://twittrss.herokuapp.com/</uri>
+  </author>
+<% @tweets.each do |tweet| %>
+
+  <entry>
+    <id>https://twitter.com/<%= @user %>/status/<%= tweet["id"] %></id>
+    <link href="https://twitter.com/<%= @user %>/status/<%= tweet["id"] %>" />
+    <updated><%= tweet["date"] %></updated>
+    <author><name><%= @user %></name></author>
+    <title>@<%= @user %></title>
+    <content type="html">
+<%= tweet["message"] %>
+    </content>
+  </entry>
+<% end %>
+</feed>

@@ -1,0 +1,37 @@
+{
+  "name": "Twitter RSS",
+  "description": "Twitter to RSS service using Cassandra",
+  "repository": "https://github.com/stefansundin/twitter-rss",
+  "website": "https://github.com/stefansundin/twitter-rss",
+  "logo": "https://stefansundin.github.io/twitter-rss/img/icon128.png",
+  "success_url": "/",
+  "addons": ["rediscloud:25", "redismonitor:free", "newrelic:stark", "papertrail:choklad", "loaderio:basic", "librato:development"],
+  "keywords": ["twitter", "cassandra"],
+  "env": {
+    "RACK_ENV": "production",
+    "TWITTER_CONSUMER_KEY": {
+      "description": "Your Twitter Consumer Key"
+    },
+    "TWITTER_CONSUMER_SECRET": {
+      "description": "Your Twitter Consumer Secret"
+    },
+    "TWITTER_ACCESS_TOKEN_KEY": {
+      "description": "Your Twitter Access Token Key"
+    },
+    "TWITTER_ACCESS_TOKEN_SECRET": {
+      "description": "Your Twitter Access Token Secret"
+    },
+    "CASSANDRA_HOSTS": {
+      "description": "Comma separated list of Cassandra hosts"
+    },
+    "CASSANDRA_USERNAME": {
+      "description": "Cassandra Username"
+    },
+    "CASSANDRA_PASSWORD": {
+      "description": "Cassandra Password"
+    },
+    "CASSANDRA_KEYSPACE": {
+      "description": "Cassandra keyspace"
+    }
+  }
+}
