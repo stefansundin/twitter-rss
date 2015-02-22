@@ -25,6 +25,7 @@ before_fork do |server, worker|
     Process.kill "QUIT", Process.pid
   end
   $redis.client.disconnect
+  $cluster.close
 end
 
 after_fork do |server, worker|
@@ -41,5 +42,4 @@ after_fork do |server, worker|
     puts "Failed to connect to cassandra cluster!"
     puts e.backtrace
   end
-
 end
