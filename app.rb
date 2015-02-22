@@ -43,7 +43,7 @@ get "/fetch/@:user" do
 end
 
 get "/favicon.ico" do
-  redirect "https://twitter.com/favicon.ico"
+  redirect "https://stefansundin.github.io/twitter-rss/img/icon32.png"
 end
 
 get "/robots.txt" do
@@ -56,9 +56,9 @@ Disallow: /
 eos
 end
 
-get %r{^/loaderio-c8b2f36404a8cc878bdd10a682ead986} do
+get %r{^/loaderio-90e6b62352b9a16f867df699701fe5f0} do
   headers "Content-Type" => "text/plain"
-  "loaderio-c8b2f36404a8cc878bdd10a682ead986"
+  "loaderio-90e6b62352b9a16f867df699701fe5f0"
 end
 
 get "/googlecd2a49223a3e752f.html" do

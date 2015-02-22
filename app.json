@@ -9,29 +9,30 @@
   "keywords": ["twitter", "cassandra"],
   "env": {
     "RACK_ENV": "production",
-    "TWITTER_CONSUMER_KEY": {
-      "description": "Your Twitter Consumer Key"
-    },
-    "TWITTER_CONSUMER_SECRET": {
-      "description": "Your Twitter Consumer Secret"
-    },
-    "TWITTER_ACCESS_TOKEN_KEY": {
-      "description": "Your Twitter Access Token Key"
-    },
-    "TWITTER_ACCESS_TOKEN_SECRET": {
-      "description": "Your Twitter Access Token Secret"
-    },
     "CASSANDRA_HOSTS": {
       "description": "Comma separated list of Cassandra hosts"
     },
     "CASSANDRA_USERNAME": {
-      "description": "Cassandra Username"
+      "description": "Cassandra username"
     },
     "CASSANDRA_PASSWORD": {
-      "description": "Cassandra Password"
+      "description": "Cassandra password"
     },
     "CASSANDRA_KEYSPACE": {
-      "description": "Cassandra keyspace"
+      "description": "Cassandra keyspace",
+      "value": "twitter"
+    },
+    "TWITTER_CONSUMER_KEY": {
+      "description": "Twitter Consumer Key"
+    },
+    "TWITTER_CONSUMER_SECRET": {
+      "description": "Twitter Consumer Secret"
+    },
+    "TWITTER_ACCESS_TOKEN_KEY": {
+      "description": "Twitter Access Token Key"
+    },
+    "TWITTER_ACCESS_TOKEN_SECRET": {
+      "description": "Twitter Access Token Secret"
     }
   }
 }
