@@ -24,6 +24,7 @@ before_fork do |server, worker|
     puts "Unicorn master intercepting TERM and sending myself QUIT instead"
     Process.kill "QUIT", Process.pid
   end
+  $redis.client.disconnect
 end
 
 after_fork do |server, worker|
@@ -31,4 +32,14 @@ after_fork do |server, worker|
     puts "Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT"
   end
   $redis.client.reconnect
+
+  # reconnect Cassandra
+  begin
+    $cluster = Cassandra.cluster username: ENV["CASSANDRA_USERNAME"], password: ENV["CASSANDRA_PASSWORD"], hosts: ENV["CASSANDRA_HOSTS"].split(",").map(&:strip)
+    $db = $cluster.connect(ENV["CASSANDRA_KEYSPACE"])
+  rescue => e
+    puts "Failed to connect to cassandra cluster!"
+    puts e.backtrace
+  end
+
 end
