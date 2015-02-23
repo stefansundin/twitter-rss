@@ -16,9 +16,16 @@ end
 
 get "/@:user" do
   @user = params[:user]
-  user_id = $redis.get("user_id:#{@user}")
-  return "Don't have the user_id for #{@user}, sorry." if user_id.nil?
-  user_id = user_id.to_i
+
+  new_tweets = $twitter.user_timeline(@user, count: 200) rescue nil
+  return "Unfortunately there does not seem to be a user with the name #{@user}." if new_tweets.nil?
+  user_id = new_tweets.first.user.id
+
+  if new_tweets
+    new_tweets.each do |tweet|
+      $db.execute "INSERT INTO tweets (id, user_id, date, message) VALUES (?, ?, ?, ?)", tweet.id, tweet.user.id, tweet.created_at, tweet.text
+    end
+  end
 
   @tweets = $db.execute("SELECT date, id, message FROM tweets WHERE user_id=? ORDER BY date DESC LIMIT 50", user_id).to_a
 
@@ -31,8 +38,6 @@ get "/fetch/@:user" do
   @tweets = $twitter.user_timeline(@user, count: 200) rescue nil
 
   return "Unfortunately there does not seem to be a user with the name #{@user}." if @tweets.nil?
-
-  $redis.set("user_id:#{@user}", @tweets[0].user.id)
 
   @tweets.each do |tweet|
     $db.execute "INSERT INTO tweets (id, user_id, date, message) VALUES (?, ?, ?, ?)", tweet.id, tweet.user.id, tweet.created_at, tweet.text

@@ -1,6 +1,6 @@
 # Twitter to RSS Feed [![Code Climate](https://codeclimate.com/github/stefansundin/twitter-rss/badges/gpa.svg)](https://codeclimate.com/github/stefansundin/twitter-rss)
 
-You can use this app freely at [twittrss.herokuapp.com](https://twittrss.herokuapp.com/), or deploy it yourself if you want to.
+You can use this app freely at [twittrss.herokuapp.com](https://twittrss.herokuapp.com/), or deploy your own if you want to.
 
 Deploy your own:
 

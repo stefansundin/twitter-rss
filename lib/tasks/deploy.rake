@@ -25,7 +25,8 @@ namespace :deploy do
     tag_name = "heroku/#{ver}"
 
     # tag and push new tag
-    system "git tag -a -m \"Deploy #{hash}\" #{tag_name} #{hash}"
+    success = system "git tag -a -m \"Deploy #{hash}\" #{tag_name} #{hash}"
+    abort if not success
     system "git push origin #{tag_name}"
   end
 end
