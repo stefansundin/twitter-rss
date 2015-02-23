@@ -11,36 +11,54 @@ end
 
 get "/go" do
   params[:user] = "infected" if params[:user].nil? or params[:user].empty?
-  redirect "/@#{params[:user]}"
+  user = $twitter.user(params[:user]) rescue nil
+  return "Unfortunately there does not seem to be a user with the name #{params[:user]}." if user.nil?
+  redirect "/#{user.id}"
 end
 
 get "/@:user" do
   @user = params[:user]
 
-  new_tweets = $twitter.user_timeline(@user, count: 200) rescue nil
-  return "Unfortunately there does not seem to be a user with the name #{@user}." if new_tweets.nil?
-  user_id = new_tweets.first.user.id
+  user_id = $redis.get("user_id:#{@user}")
+  if user_id
+    user_id = user_id.to_i
+  else
+    new_tweets = $twitter.user_timeline(@user, count: 200) rescue nil
+    return "Unfortunately there does not seem to be a user with the name #{@user}." if new_tweets.nil?
 
-  if new_tweets
-    new_tweets.each do |tweet|
-      $db.execute "INSERT INTO tweets (id, user_id, date, message) VALUES (?, ?, ?, ?)", tweet.id, tweet.user.id, tweet.created_at, tweet.text
+    user_id = new_tweets[0].user.id
+    $redis.set "user_id:#{@user}", user_id
+    $redis.expire "user_id:#{@user}", 10*60
+
+    if new_tweets
+      new_tweets.each do |tweet|
+        $db.execute "INSERT INTO tweets (id, user_id, date, message) VALUES (?, ?, ?, ?)", arguments: [tweet.id, tweet.user.id, tweet.created_at, tweet.text]
+      end
     end
   end
 
-  @tweets = $db.execute("SELECT date, id, message FROM tweets WHERE user_id=? ORDER BY date DESC LIMIT 50", user_id).to_a
+  @tweets = $db.execute("SELECT date, id, message FROM tweets WHERE user_id=? ORDER BY date DESC LIMIT 50", arguments: [user_id]).to_a
 
   headers "Content-Type" => "application/atom+xml;charset=utf-8"
   erb :feed
 end
 
+get %r{/(?<user_id>\d+)} do |user_id|
+  return user_id
+end
+
 get "/fetch/@:user" do
   @user = params[:user]
-  @tweets = $twitter.user_timeline(@user, count: 200) rescue nil
+  new_tweets = $twitter.user_timeline(@user, count: 200) rescue nil
 
-  return "Unfortunately there does not seem to be a user with the name #{@user}." if @tweets.nil?
+  return "Unfortunately there does not seem to be a user with the name #{@user}." if new_tweets.nil?
 
-  @tweets.each do |tweet|
-    $db.execute "INSERT INTO tweets (id, user_id, date, message) VALUES (?, ?, ?, ?)", tweet.id, tweet.user.id, tweet.created_at, tweet.text
+  user_id = new_tweets[0].user.id
+  $redis.set "user_id:#{@user}", user_id
+  $redis.expire "user_id:#{@user}", 10*60
+
+  new_tweets.each do |tweet|
+    $db.execute "INSERT INTO tweets (id, user_id, date, message) VALUES (?, ?, ?, ?)", arguments: [tweet.id, tweet.user.id, tweet.created_at, tweet.text]
   end
 
   headers "Content-Type" => "text/plain"

@@ -25,7 +25,7 @@ before_fork do |server, worker|
     Process.kill "QUIT", Process.pid
   end
   $redis.client.disconnect
-  $cluster.close
+  $cluster.close rescue nil
 end
 
 after_fork do |server, worker|
