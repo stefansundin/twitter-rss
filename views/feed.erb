@@ -5,7 +5,7 @@
   <icon>https://twitter.com/favicon.ico</icon>
   <link href="https://twitter.com/<%= @user %>" />
   <link href="https://twittrss.herokuapp.com/@<%= @user %>" rel="self" />
-  <updated><%= @tweets[0]["date"].utc.strftime('%FT%TZ') if @tweets[0] %></updated>
+  <updated><%= @tweets[0]["date"] if @tweets[0] %></updated>
   <author>
     <name>Stefan Sundin</name>
     <uri>https://twittrss.herokuapp.com/</uri>
