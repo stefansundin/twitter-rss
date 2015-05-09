@@ -50,7 +50,7 @@ get %r{/(?<user_id>\d+)} do |user_id|
     end
     $redis.setex "tweets:#{@user_id}", 10*60, @tweets.to_json
 
-    @tweets = $db.execute("SELECT date, id, message FROM tweets WHERE user_id=? ORDER BY date DESC LIMIT 50", arguments: [@user_id]).to_a
+    @tweets = $db.execute("SELECT date, id, message FROM tweets WHERE user_id=? ORDER BY date DESC LIMIT 200", arguments: [@user_id]).to_a
     $redis.setex "tweets:#{@user_id}", 10*60, @tweets.to_json
   end
 
