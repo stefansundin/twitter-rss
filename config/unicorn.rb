@@ -1,5 +1,5 @@
-environment = ENV["RACK_ENV"] || "development"
-if environment == "development"
+ENV["RACK_ENV"] ||= "development"
+if ENV["RACK_ENV"] == "development"
   # better_errors and binding_of_caller works better with only one process
   worker_processes 1
 else
@@ -9,14 +9,13 @@ end
 timeout 60
 preload_app true
 
-# app_path = File.expand_path(File.dirname(__FILE__) + "/..")
-# listen app_path + "/tmp/unicorn.sock", backlog: 64
-# listen 3000, backlog: 64
-
-# working_directory app_path
+app_path = File.expand_path("../..", __FILE__)
+working_directory app_path
 # pid app_path + "/tmp/unicorn.pid"
 # stdout_path app_path + "/log/unicorn-stdout.log"
 # stderr_path app_path + "/log/unicorn-stderr.log"
+# listen app_path + "/tmp/unicorn.sock", backlog: 64
+# listen 3000, backlog: 64
 
 
 before_fork do |server, worker|

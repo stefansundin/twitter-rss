@@ -2,17 +2,18 @@ source "https://rubygems.org"
 
 ruby File.read(".ruby-version").strip
 
-# newer rack has bug with sinatra exceptions
-gem "rack", "1.5.2"
-
-gem "unicorn"
+gem "rack"
 gem "sinatra"
+gem "bundler"
+gem "unicorn"
 gem "redis"
 gem "cassandra-driver"
 gem "twitter"
 gem "httparty"
 gem "newrelic_rpm"
 gem "rack-ssl-enforcer"
+gem "clogger"
+gem "heroku-env"
 
 group :development do
   gem "rake"
@@ -22,4 +23,5 @@ group :development do
   gem "binding_of_caller"
   gem "better_errors"
   gem "pry-remote"
+  gem "github-release-party"
 end

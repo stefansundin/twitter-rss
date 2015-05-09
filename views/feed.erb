@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <id>https://twitter.com/<%= @user %></id>
-  <title>@<%= @user %></title>
+  <id>https://twitter.com/<%= @username %></id>
+  <title>@<%= @username %></title>
   <icon>https://twitter.com/favicon.ico</icon>
-  <link href="https://twitter.com/<%= @user %>" />
-  <link href="https://twittrss.herokuapp.com/@<%= @user %>" rel="self" />
+  <link href="https://twitter.com/<%= @username %>" />
+  <link href="https://twittrss.herokuapp.com/<%= "#{@user_id}#@#{@username}" %>" rel="self" />
   <updated><%= @tweets[0]["date"] if @tweets[0] %></updated>
-  <author>
-    <name>Stefan Sundin</name>
-    <uri>https://twittrss.herokuapp.com/</uri>
-  </author>
-<% @tweets.each do |tweet| %>
+<%- @tweets.each do |tweet| -%>
 
   <entry>
-    <id>https://twitter.com/<%= @user %>/status/<%= tweet["id"] %></id>
-    <link href="https://twitter.com/<%= @user %>/status/<%= tweet["id"] %>" />
+    <id>https://twitter.com/<%= @username %>/status/<%= tweet["id"] %></id>
+    <link href="https://twitter.com/<%= @username %>/status/<%= tweet["id"] %>" />
     <updated><%= tweet["date"] %></updated>
-    <author><name><%= @user %></name></author>
-    <title>@<%= @user %></title>
+    <author><name><%= @username %></name></author>
+    <title><%= @username %></title>
     <content type="html">
 <%= tweet["message"] %>
     </content>
   </entry>
-<% end %>
+<%- end -%>
 </feed>

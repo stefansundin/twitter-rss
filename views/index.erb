@@ -10,22 +10,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <link rel="icon" href="https://stefansundin.github.io/twitter-rss/img/icon32.png">
+  <link rel="icon" href="/img/icon32.png">
   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="https://stefansundin.github.io/css/main.css">
-  <link rel="alternate" href="https://github.com/stefansundin/twitter-rss/releases.atom" title="Release feed" />
+  <link rel="alternate" href="https://github.com/stefansundin/twitter-rss/releases.atom" title="Release feed">
 </head>
-<body>
+<body ga="<%= ENV["GOOGLE_ANALYTICS_ID"] %>">
   <header>
-    <img src="https://stefansundin.github.io/twitter-rss/img/icon128.png" width="128" height="128" alt="Icon" itemprop="image">
+    <img src="/img/icon128.png" width="128" height="128" alt="Icon" itemprop="image">
     <hgroup>
       <h1 itemprop="name">Twitter RSS Feeds</h1>
     </hgroup>
   </header>
 
-  <form class="topbar input-group col-sm-3" method="get" action="/go">
-    <input class="form-control" type="search" name="user" placeholder="A Twitter username" pattern="[a-zA-Z0-9_]+" title="Input a Twitter username without @.">
+  <form class="topbar input-group" method="get" action="/go">
+    <input class="form-control" type="search" name="q" placeholder="A Twitter username" pattern="[a-zA-Z0-9_]+" title="Input a Twitter username without @.">
     <span class="input-group-btn">
       <input class="btn btn-primary" type="submit" value="Get RSS Feed">
     </span>
