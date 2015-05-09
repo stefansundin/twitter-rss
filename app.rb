@@ -17,15 +17,15 @@ get "/go" do
   params[:q] = "infected" if params[:q].nil? or params[:q].empty?
   user = $twitter.user(params[:q]) rescue nil
   return "There does not seem to be a user with the name #{params[:q]}." if user.nil?
-  redirect "/#{user.id}#@#{user.screen_name}"
+  redirect "/#{user.id}/@#{user.screen_name}"
 end
 
 get "/@:user" do
   user = $twitter.user(params[:user]) rescue nil
-  redirect "/#{user.id}#@#{user.screen_name}"
+  redirect "/#{user.id}/@#{user.screen_name}"
 end
 
-get %r{/(?<user_id>\d+)$} do |user_id|
+get %r{/(?<user_id>\d+)} do |user_id|
   @user_id = user_id.to_i
 
   @username = $redis.get("username:#{@user_id}")
