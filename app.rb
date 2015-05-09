@@ -40,7 +40,7 @@ get %r{/(?<user_id>\d+)} do |user_id|
   if data
     @tweets = JSON.parse data
   else
-    new_tweets = $twitter.user_timeline(@user, count: 200) rescue nil
+    new_tweets = $twitter.user_timeline(@user_id, count: 200) rescue nil
     return "There does not seem to be a user with the id #{@user_id}." if new_tweets.nil?
 
     if new_tweets

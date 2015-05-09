@@ -4,7 +4,7 @@
   <title>@<%= @username %></title>
   <icon>https://twitter.com/favicon.ico</icon>
   <link href="https://twitter.com/<%= @username %>" />
-  <link href="https://twittrss.herokuapp.com/<%= "#{@user_id}#@#{@username}" %>" rel="self" />
+  <link href="https://twittrss.herokuapp.com/<%= "#{@user_id}/@#{@username}" %>" rel="self" />
   <updated><%= @tweets[0]["date"] if @tweets[0] %></updated>
 <%- @tweets.each do |tweet| -%>
 
