@@ -23,9 +23,9 @@ end
 get %r{/(?<user_id>\d+)$} do |user_id|
   @user_id = user_id.to_i
 
-  @username = $redis.get("username:#{user_id}")
+  @username = $redis.get("username:#{@user_id}")
   if not @username
-    user = $twitter.user(user_id) rescue nil
+    user = $twitter.user(@user_id) rescue nil
     return "There does not seem to be a user with the id #{@user_id}." if user.nil?
     @username = user.username
     $redis.setex "username:#{@user_id}", 24*60*60, @username
