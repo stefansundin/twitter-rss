@@ -7,13 +7,17 @@ gem "sinatra"
 gem "bundler"
 gem "unicorn"
 gem "redis"
+gem "redis-namespace"
 gem "cassandra-driver"
-gem "twitter"
 gem "httparty"
 gem "newrelic_rpm"
 gem "rack-ssl-enforcer"
 gem "clogger"
 gem "heroku-env"
+
+source "https://repo.fury.io/stefansundin/" do
+  gem "twitter"
+end
 
 group :development do
   gem "rake"

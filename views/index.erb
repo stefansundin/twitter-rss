@@ -34,23 +34,14 @@
   <div class="container">
     <h2>About</h2>
 
-    <p>This app lets you subscribe to Twitter user's timelines as RSS feeds.</p>
-
-    <p>Using the form above you will be redirected to a url that uses that user's Twitter id. You can also easily subscribe to usernames by using e.g. <a href="/@infected">/@infected</a>. The benefit of using a Twitter id is that the feed will continue to work even if the user changes their username.</p>
+    <p>This app lets you subscribe to Twitter users' timelines as RSS feeds. The form above will look up the user and generate a feed based on the user's Twitter id. If they change their Twitter username, the feed will continue to work.</p>
 
     <p>Post ideas as issues <a href="https://github.com/stefansundin/twitter-rss">on GitHub</a>.</p>
 
 
-    <h2>Credits</h2>
-
-    <p>Made by Stefan Sundin.</p>
-
-    <p>You can <a href="https://stefansundin.github.io/">browse my other projects</a>, or <a href="https://stefansundin.com/">visit my personal website</a>.</p>
-
-
     <h2>Donate</h2>
 
-    <p>I provide this service free of charge. If you would like to thank me, please send me a donation.</p>
+    <p>I provide this service free of charge. If you find it useful, please make a donation. I greatly appreciate any support!</p>
 
     <form method="post" action="https://www.paypal.com/cgi-bin/webscr" track="donate">
       <input type="hidden" name="cmd" value="_xclick">
@@ -66,16 +57,28 @@
       </div>
     </form>
 
-    <p>Or you can send Bitcoin to: <tt>1EhDUbc5MjC6JavC6idKiTCxnqSxY2sbTX</tt> (<a href="https://stefansundin.github.io/img/btc-qr.png">QR code</a>)</p>
+    <p><small><a class="expander" expand="donation-options">Show other donation options: Bitcoin, Square Cash.</a></small></p>
+    <div class="expandable" id="donation-options">
+      <p>Other donation options:</p>
+      <ul>
+        <li>Bitcoin: <tt>1EhDUbc5MjC6JavC6idKiTCxnqSxY2sbTX</tt> (<a href="https://stefansundin.github.io/img/btc-qr.png">QR code</a>)</li>
+        <li>Square Cash: <a href="https://cash.me/$StefanSundin">$StefanSundin</a></li>
+      </ul>
+    </div>
 
-    <p>You can also send Square Cash to: <a>squarEStefansundinCom</a></p>
+
+    <h2>Credits</h2>
+
+    <p>Made by Stefan Sundin.</p>
+
+    <p>You can <a href="https://stefansundin.github.io/">browse my other projects</a>, or <a href="https://stefansundin.com/">visit my personal website</a>.</p>
 
 
     <h2>Danger Zone</h2>
 
     <p>
-      Remaining Twitter API ratelimit: <%= "%s / %s" % [@ratelimit[:remaining] || @ratelimit[:limit] || "unknown", @ratelimit[:limit] || "unknown"] %>.
-      <%= "Resets in %d min." % ((@ratelimit[:reset]-Time.now)/60) if @ratelimit[:reset] %>
+      Remaining Twitter ratelimit: <%= "%s / %s" % [@ratelimit[:remaining] || @ratelimit[:limit] || "unknown", @ratelimit[:limit] || "unknown"] %>.
+      <%= "Resets in %d min." % [(@ratelimit[:reset]-Time.now)/60] if @ratelimit[:reset] %>
     </p>
 
     <p><a class="btn btn-danger" href="/flush"><span class="glyphicon glyphicon-trash"></span> Flush cache</a></p>
@@ -85,7 +88,7 @@
 
   <% if request.host == "twittrss.herokuapp.com" %>
   <script src="https://stefansundin.github.io/js/ga.js"></script>
-  <script src="https://stefansundin.github.io/js/fubar.js"></script>
   <% end %>
+  <script src="https://stefansundin.github.io/js/main.js"></script>
 </body>
 </html>
