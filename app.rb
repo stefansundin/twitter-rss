@@ -22,6 +22,7 @@ end
 
 get "/@:user" do
   user = $twitter.user(params[:user]) rescue nil
+  return "There does not seem to be a user with the name #{params[:user]}." if user.nil?
   redirect "/#{user.id}/@#{user.screen_name}"
 end
 
@@ -88,5 +89,5 @@ end
 
 
 error do
-  "Sorry, a nasty error occurred: #{env["sinatra.error"].name}"
+  "Sorry, a nasty error occurred: #{env["sinatra.error"].message}"
 end

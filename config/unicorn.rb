@@ -31,7 +31,13 @@ after_fork do |server, worker|
   Signal.trap "TERM" do
     puts "Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT"
   end
-  $redis.client.reconnect
+
+  begin
+    $redis.client.reconnect
+  rescue => e
+    puts "Failed to reconnect to redis!"
+    puts e.backtrace
+  end
 
   # reconnect Cassandra
   begin
