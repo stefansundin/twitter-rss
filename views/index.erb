@@ -31,6 +31,12 @@
     </span>
   </form>
 
+  <%- if !ENV["TWITTER_BEARER_TOKEN"] -%>
+  <div class="text-center">
+    Please cache your bearer token in <tt>ENV</tt>! Run <tt>bin/bearer_token</tt> to get it.
+  </div>
+  <%- end -%>
+
   <div class="container">
     <h2>About</h2>
 
@@ -86,9 +92,9 @@
     <p>This button clears the redis cache. Only use in emergencies.</p>
   </div>
 
-  <% if request.host == "twittrss.herokuapp.com" %>
+  <%- if request.host == "twittrss.herokuapp.com" -%>
   <script src="https://stefansundin.github.io/js/ga.js"></script>
-  <% end %>
+  <%- end -%>
   <script src="https://stefansundin.github.io/js/main.js"></script>
 </body>
 </html>

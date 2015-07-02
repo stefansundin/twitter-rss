@@ -14,7 +14,7 @@ get "/" do
 end
 
 get "/go" do
-  params[:q] = "infected" if params[:q].nil? or params[:q].empty?
+  params[:q] = "infected" if params[:q].empty?
   user = $twitter.user(params[:q]) rescue nil
   return "There does not seem to be a user with the name #{params[:q]}." if user.nil?
   redirect "/#{user.id}/@#{user.screen_name}"

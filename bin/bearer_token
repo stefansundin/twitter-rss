@@ -1,0 +1,1 @@
+bundle exec ruby -r ./app -e '$twitter.user("twitter"); puts "TWITTER_BEARER_TOKEN="+$twitter.bearer_token'
