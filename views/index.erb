@@ -11,20 +11,67 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <link rel="icon" href="/img/icon32.png">
-  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="https://stefansundin.github.io/css/main.css">
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha384-pdapHxIh7EYuwy6K7iE41uXVxGCXY0sAjBzaElYGJUrzwodck3Lx6IE2lA0rFREo" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
   <link rel="alternate" href="https://github.com/stefansundin/twitter-rss/releases.atom" title="Release feed">
+  <link rel="license" href="https://www.gnu.org/licenses/gpl-3.0.html" title="GNU GPL v3 or later">
+  <style type="text/css">
+body {
+  padding: 0 15px;
+  margin-bottom: 100px;
+}
+a {
+  cursor: pointer;
+}
+.container {
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+header {
+  margin-top: 25px;
+  text-align: center;
+}
+header h1 {
+  font-size: 4em;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+}
+h2 {
+  border-bottom: 1px solid #ccc;
+  margin-top: 2em;
+  padding-bottom: 0.125em;
+}
+
+form[action="/go"] {
+  margin: 2em auto 0;
+  text-align: center;
+  max-width: 350px;
+}
+input:invalid {
+  background-color: orange;
+}
+.input-group {
+  margin-bottom: 15px;
+}
+
+.expander {
+  display: none;
+}
+  </style>
 </head>
 <body ga="<%= ENV["GOOGLE_ANALYTICS_ID"] %>">
   <header>
     <img src="/img/icon128.png" width="128" height="128" alt="Icon" itemprop="image">
-    <hgroup>
-      <h1 itemprop="name">Twitter RSS Feeds</h1>
-    </hgroup>
+    <h1 itemprop="name">Twitter RSS Feeds</h1>
   </header>
 
-  <form class="topbar input-group" method="get" action="/go">
+  <form class="input-group" method="get" action="/go">
     <input class="form-control" type="search" name="q" placeholder="A Twitter username" pattern="[a-zA-Z0-9_]+" title="Input a Twitter username without @.">
     <span class="input-group-btn">
       <input class="btn btn-primary" type="submit" value="Get RSS Feed">
@@ -63,13 +110,15 @@
       </div>
     </form>
 
-    <p><small><a class="expander" expand="donation-options">Show other donation options: Bitcoin, Square Cash.</a></small></p>
-    <div class="expandable" id="donation-options">
+    <p><small><a class="expander" expand="donation-options">Show other donation options: Bitcoin, Square Cash, ChangeTip.</a></small></p>
+    <div id="donation-options">
       <p>Other donation options:</p>
       <ul>
         <li>Bitcoin: <tt>1EhDUbc5MjC6JavC6idKiTCxnqSxY2sbTX</tt> (<a href="https://stefansundin.github.io/img/btc-qr.png">QR code</a>)</li>
         <li>Square Cash: <a href="https://cash.me/$StefanSundin">$StefanSundin</a></li>
+        <li>ChangeTip: <a href="https://www.changetip.com/tipme/stefansundin">stefansundin</a></li>
       </ul>
+      <p>Contact me at <a fubar>stefaNStefansundinCom</a> if none of the above work.</p>
     </div>
 
 
@@ -96,5 +145,6 @@
   <script src="https://stefansundin.github.io/js/ga.js"></script>
   <%- end -%>
   <script src="https://stefansundin.github.io/js/main.js"></script>
+  <script src="https://stefansundin.github.io/js/fubar.js"></script>
 </body>
 </html>
